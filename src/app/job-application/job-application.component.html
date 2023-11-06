@@ -1,0 +1,68 @@
+<form [formGroup]="jobApplicationForm" (ngSubmit)="submitApplication()">
+  <div class="form-group">
+    <label for="firstName">Имя:</label>
+    <input type="text" id="firstName" formControlName="firstName" [class.is-invalid]="isFirstNameInvalid">
+    <!-- Ошибка для имени -->
+    <div *ngIf="isFirstNameInvalid" class="text-danger">Username is required</div>
+  </div>
+  <div class="form-group">
+    <label for="lastName">Фамилия:</label>
+    <input type="text" id="lastName" formControlName="lastName" [class.is-invalid]="isFirstNameInvalid">
+    <!-- Ошибка для фамилии -->
+    <div *ngIf="isFirstNameInvalid" class="text-danger">Username is required</div>
+  </div>
+
+  <div>
+    <label>Gender:</label>
+    <div>
+      <input type="radio" id="male" name="gender" value="male" formControlName="gender">
+      <label for="male">Male</label>
+    </div>
+    <div>
+      <input type="radio" id="female" name="gender" value="female" formControlName="gender">
+      <label for ="female">Female</label>
+    </div>
+  </div>
+
+  <div formGroupName="address">
+    <label for="street">Address:</label>
+    <input type="text" id ="street" formControlName="street">
+  </div>
+
+  <div>
+    <label for="phoneNumber">Phone Number:</label>
+    <input type="text" id="phoneNumber" formControlName="phoneNumber">
+  </div>
+
+  <div>
+    <label for="birthdate">Date of Birth:</label>
+    <input type="date" id="birthdate" formControlName="birthdate">
+  </div>
+
+  <div>
+    <label>Position:</label>
+    <select formControlName="position">
+      <option value="juniorDotNet">Junior .NET Developer</option>
+      <option value="middleDotNet">Middle .NET Developer</option>
+      <option value="juniorAngular">Junior Angular Developer</option>
+      <option value="angularTeamLead">Angular Team Lead</option>
+      <option value="dotNetTeamLead">.NET Team Lead</option>
+    </select>
+  </div>
+
+  <div>
+    <label>
+      <input type="checkbox" formControlName="subscribeToNewsletter">
+      Subscribe to the newsletter via email
+    </label>
+  </div>
+
+  <div *ngIf="jobApplicationForm?.get('subscribeToNewsletter')?.value">
+    <div>
+      <label for="email">Email:</label>
+      <input type="email" id="email" formControlName="email">
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="!jobApplicationForm.invalid">Submit Application</button>
+</form>
